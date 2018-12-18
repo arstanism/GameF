@@ -24,7 +24,7 @@ namespace GameF.Helpers
         {
             for(coord.Y = 0; coord.Y < size; coord.Y++)
             {
-                for(coord.X = 0; coord.X < size;coord.X++)
+                for(coord.X = 0; coord.X < size; coord.X++)
                 {
                     yield return coord;
                 }
