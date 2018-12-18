@@ -24,11 +24,15 @@ namespace GameF.Logic
         {
             this.EmptyCoord = new Coordinate(this.Size);
             int digit = 0;
-            foreach(var coord in new Coordinate().GetCoordinates(this.Size))
+
+            for(int x = 0; x < this.Size; x++)
             {
-                this.Board.SetCoordinate(coord, ++digit);
+                for(int y = 0; y < this.Size; y++)
+                {
+                    this.Board.SetCoordinate(new Coordinate(x, y), ++digit);
+                }
             }
-            
+
             if(seed > 0)
             {
                 Shuffle(seed);
@@ -94,18 +98,22 @@ namespace GameF.Logic
             }
 
             int digit = 0;
-            foreach(var coord in new Coordinate().GetCoordinates(this.Size))
+
+            for(int x = 0; x < this.Size; x++)
             {
-                if(this.Board.GetCoordinate(coord) != ++digit)
+                for(int y = 0; y < this.Size; y++)
                 {
-                    return this.EmptyCoord.Equals(coord);
+                    var coord = new Coordinate(x, y);
+                    if(this.Board.GetCoordinate(coord) != ++digit)
+                    {
+                        return this.EmptyCoord.Equals(coord);
+                    }
                 }
             }
 
             return true;
         }
 
-        #region Privates methods
         private void Shift(int sx, int sy)
         {
             var nextCoord = this.EmptyCoord.Add(sx, sy);
@@ -121,6 +129,5 @@ namespace GameF.Logic
                 this.PressAt(random.Next(this.Size), random.Next(this.Size));
             }
         }
-        #endregion
     }
 }

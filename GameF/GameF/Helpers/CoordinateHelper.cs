@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GameF.Entities;
+﻿using GameF.Entities;
 
 namespace GameF.Helpers
 {
@@ -18,17 +17,6 @@ namespace GameF.Helpers
             }
 
             return result;
-        }
-
-        public static IEnumerable<Coordinate> GetCoordinates(this Coordinate coord, int size)
-        {
-            for(coord.Y = 0; coord.Y < size; coord.Y++)
-            {
-                for(coord.X = 0; coord.X < size; coord.X++)
-                {
-                    yield return coord;
-                }
-            }
         }
 
         public static Coordinate Add(this Coordinate coord, int additingX, int additingY)

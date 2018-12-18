@@ -31,15 +31,12 @@ namespace GameF
                 if(this.Game.IsSolved())
                 {
                     labelSteps.Text = "Done!";
-                    this.HideButtons();
                 }
             }
         }
 
         protected void Start_Clicked(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            button.Text = "Shuffle";
             int seed = new Random().Next(1000);
             this.Game.Start(seed);
             this.ShowButtons();
