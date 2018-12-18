@@ -1,12 +1,12 @@
 ﻿namespace GameF.Entities
 {
-    public class Map
+    public class Board
     {
         public int Size { get; set; }
 
         public int[,] Grid { get; set; }
 
-        public Map(int size)
+        public Board(int size)
         {
             this.Size = size;
             this.Grid = new int[size, size];

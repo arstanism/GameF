@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameF.MainPage">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        
+        <Button 
+            Text="Start" 
+            Clicked="Start_Clicked"
+            IsTabStop="False"
+            HorizontalOptions="Center"/>
         <Grid ColumnSpacing="5" RowSpacing="5" VerticalOptions="Center" HorizontalOptions="Center" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*" />
@@ -17,25 +21,30 @@
                 <RowDefinition Height="20*" />
                 <RowDefinition Height="20*" />
             </Grid.RowDefinitions>
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Aqua" Grid.Column="0" Grid.Row="0"/>
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="AliceBlue" Grid.Column="0" Grid.Row="1" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Blue" Grid.Column="0" Grid.Row="2" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Fuchsia" Grid.Column="0" Grid.Row="3" />
-
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Teal" Grid.Column="1" Grid.Row="0" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Green" Grid.Column="1" Grid.Row="1" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Maroon" Grid.Column="1" Grid.Row="2" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="DarkKhaki" Grid.Column="1" Grid.Row="3" />
-
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Olive" Grid.Column="2" Grid.Row="0" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Pink" Grid.Column="2" Grid.Row="1" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="2" Grid.Row="2" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="LightBlue" Grid.Column="2" Grid.Row="3" />
-
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="MediumAquamarine" Grid.Column="3" Grid.Row="0" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="Orange" Grid.Column="3" Grid.Row="1" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="LightSteelBlue" Grid.Column="3" Grid.Row="2" />
-            <Button Text="F" Clicked="Button_Clicked" BackgroundColor="PaleVioletRed" Grid.Column="3" Grid.Row="3" />
+            <Button x:Name="b00" ClassId="b00" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="0" Grid.Row="0" IsTabStop="False" />
+            <Button x:Name="b10" ClassId="b10" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="0" Grid.Row="1" IsTabStop="False" />
+            <Button x:Name="b20" ClassId="b20" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="0" Grid.Row="2" IsTabStop="False" />
+            <Button x:Name="b30" ClassId="b30" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="0" Grid.Row="3" IsTabStop="False" />
+                    
+            <Button x:Name="b01" ClassId="b01" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="1" Grid.Row="0" IsTabStop="False"/>
+            <Button x:Name="b11" ClassId="b11" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="1" Grid.Row="1" IsTabStop="False"/>
+            <Button x:Name="b21" ClassId="b21" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="1" Grid.Row="2" IsTabStop="False"/>
+            <Button x:Name="b31" ClassId="b31" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="1" Grid.Row="3" IsTabStop="False"/>
+                    
+            <Button x:Name="b02" ClassId="b02" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="2" Grid.Row="0" IsTabStop="False"/>
+            <Button x:Name="b12" ClassId="b12" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="2" Grid.Row="1" IsTabStop="False"/>
+            <Button x:Name="b22" ClassId="b22" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="2" Grid.Row="2" IsTabStop="False"/>
+            <Button x:Name="b32" ClassId="b32" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="2" Grid.Row="3" IsTabStop="False"/>
+                    
+            <Button x:Name="b03" ClassId="b03" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="3" Grid.Row="0" IsTabStop="False"/>
+            <Button x:Name="b13" ClassId="b13" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="3" Grid.Row="1" IsTabStop="False"/>
+            <Button x:Name="b23" ClassId="b23" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="3" Grid.Row="2" IsTabStop="False"/>
+            <Button x:Name="b33" ClassId="b33" Clicked="Button_Clicked" BackgroundColor="Yellow" Grid.Column="3" Grid.Row="3" IsTabStop="False"/>
         </Grid>
+        <Label 
+            x:Name="Steps" 
+            IsTabStop="False" 
+            VerticalTextAlignment="Center" 
+            HorizontalTextAlignment="Center"/>
     </StackLayout>
 </ContentPage>

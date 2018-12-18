@@ -1,6 +1,6 @@
-﻿using GameF.Entities;
+﻿using System;
+using GameF.Entities;
 using GameF.Helpers;
-using System;
 
 namespace GameF.Logic
 {
@@ -10,70 +10,77 @@ namespace GameF.Logic
 
         public int Steps { get; private set; }
 
-        private Map Map { get; set; }
+        private Board Board { get; set; }
 
-        /// <summary>
-        /// This is an empty coordinate to determine the end of game.
-        /// </summary>
-        private Coordinate Space { get; set; }
+        private Coordinate EmptyCoord { get; set; }
 
         public Game(int size)
         {
             this.Size = size;
-            this.Map = new Map(size);
+            this.Board = new Board(size);
         }
 
-        public void Start(int variants)
+        public void Start(int seed)
         {
+            this.EmptyCoord = new Coordinate(this.Size);
             int digit = 0;
-            foreach(var coord in new Coordinate(0, 0).GetCoordinates(this.Size))
+            foreach(var coord in new Coordinate().GetCoordinates(this.Size))
             {
-                this.Map.SetCoordinate(coord, ++digit);
+                this.Board.SetCoordinate(coord, ++digit);
             }
-
-            this.Space = new Coordinate(this.Size);
-
-            if(variants > 0)
+            
+            if(seed > 0)
             {
-                Shuffle(variants);
+                Shuffle(seed);
             }
 
             this.Steps = 0;
         }
 
+        public int PressAt(int x, int y)
+        {
+            return this.PressAt(new Coordinate(x, y));
+        }
+
         public int PressAt(Coordinate coord)
         {
-            if(this.Space.Equals(coord))
-            {
-                return 0;
-            }
-            if(coord.X != this.Space.X &&
-               coord.Y != this.Space.Y)
+            if(this.EmptyCoord.Equals(coord))
             {
                 return 0;
             }
 
-            int steps = Math.Abs(coord.X - this.Space.X) + Math.Abs(coord.Y - this.Space.Y);
-            while(coord.X != this.Space.X)
+            if(coord.X != this.EmptyCoord.X &&
+               coord.Y != this.EmptyCoord.Y)
             {
-                this.Shift(Math.Sign(coord.X - this.Space.X), 0);
+                return 0;
             }
 
-            while(coord.Y != this.Space.Y)
+            int steps = Math.Abs(coord.X - this.EmptyCoord.X) + Math.Abs(coord.Y - this.EmptyCoord.Y);
+            while(coord.X != this.EmptyCoord.X)
             {
-                this.Shift(0, Math.Sign(coord.Y - this.Space.Y));
+                this.Shift(Math.Sign(coord.X - this.EmptyCoord.X), 0);
+            }
+
+            while(coord.Y != this.EmptyCoord.Y)
+            {
+                this.Shift(0, Math.Sign(coord.Y - this.EmptyCoord.Y));
             }
 
             this.Steps += steps;
             return steps;
         }
 
+        public int GetDigitAt(int x, int y)
+        {
+            return this.GetDigitAt(new Coordinate(x, y));
+        }
+
         public int GetDigitAt(Coordinate coord)
         {
             int result = 0;
-            if(!this.Space.Equals(coord))
+            if(!this.EmptyCoord.Equals(coord))
             {
-                return this.Map.GetCoordinate(coord);
+                result = this.Board.GetCoordinate(coord);
             }
 
             return result;
@@ -81,17 +88,17 @@ namespace GameF.Logic
 
         public bool IsSolved()
         {
-            if(!this.Space.Equals(new Coordinate(this.Size)))
+            if(!this.EmptyCoord.Equals(new Coordinate(this.Size)))
             {
                 return false;
             }
 
             int digit = 0;
-            foreach(var coord in new Coordinate(0, 0).GetCoordinates(this.Size))
+            foreach(var coord in new Coordinate().GetCoordinates(this.Size))
             {
-                if(this.Map.GetCoordinate(coord) != ++digit)
+                if(this.Board.GetCoordinate(coord) != ++digit)
                 {
-                    return this.Space.Equals(coord);
+                    return this.EmptyCoord.Equals(coord);
                 }
             }
 
@@ -101,18 +108,17 @@ namespace GameF.Logic
         #region Privates methods
         private void Shift(int sx, int sy)
         {
-            var nextCoord = this.Space.Add(sx, sy);
-            this.Map.CopyTo(nextCoord, this.Space);
-            this.Space = nextCoord;
+            var nextCoord = this.EmptyCoord.Add(sx, sy);
+            this.Board.Copy(nextCoord, this.EmptyCoord);
+            this.EmptyCoord = nextCoord;
         }
 
-        private void Shuffle(int variants)
+        private void Shuffle(int seed)
         {
-            var random = new Random(variants);
-            for(int i = 0; i < variants; i++)
+            var random = new Random(seed);
+            for(int i = 0; i < seed; i++)
             {
-                var coord = new Coordinate(random.Next(this.Size), random.Next(this.Size));
-                this.PressAt(coord);
+                this.PressAt(random.Next(this.Size), random.Next(this.Size));
             }
         }
         #endregion

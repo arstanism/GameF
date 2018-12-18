@@ -1,5 +1,5 @@
-﻿using GameF.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GameF.Entities;
 
 namespace GameF.Helpers
 {
@@ -31,9 +31,9 @@ namespace GameF.Helpers
             }
         }
 
-        public static Coordinate Add(this Coordinate coord, int sx, int sy)
+        public static Coordinate Add(this Coordinate coord, int additingX, int additingY)
         {
-            return new Coordinate(coord.X + sx, coord.Y + sy);
+            return new Coordinate(coord.X + additingX, coord.Y + additingY);
         }
     }
 }
